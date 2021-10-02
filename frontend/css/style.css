@@ -1,0 +1,12 @@
+.error {
+    color: red;
+}
+.wrapper {
+    background: #f4f6f9;
+}
+.content-wrapper {
+    display: block;
+    width: 78%;
+    margin-left: auto !important;
+    margin-right: auto;
+}
