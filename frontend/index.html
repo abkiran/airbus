@@ -31,7 +31,7 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <div class="container">
-                <a href="/" class="navbar-brand">
+                <a href="index.html" class="navbar-brand">
                     <img src="https://www.airbus.com/content/dam/corporate-topics/branding/logos/Airbus_white.png" alt="Airbus Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8;background: #333;padding: 5px;border-radius: 2px;">
                     <!-- <span class="brand-text font-weight-light">Airbus</span> -->
@@ -77,8 +77,21 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Inventory list</h3>
-                            <button class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#create_inventory">Create</button>
+                            <div class="col-md-4">
+                                <h3 class="card-title">Inventory list</h3>
+                            </div>
+                            <button class="btn btn-md btn-primary float-right" data-toggle="modal" data-target="#create_inventory">Create</button>
+                            <div class="col-md-4 float-right mr-5">
+                                <div class="form-group">
+                                    <!-- <label for="product_category">Product Category</label> -->
+                                    <select id="product_category_filter" onChange="get_inventory()" title="Filter category" class="form-control select2" required>
+                                        <option value=""> - Filter Category - </option>
+                                        <option>Commercial</option>
+                                        <option>Space</option>
+                                        <option>Helicopter</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -119,7 +132,7 @@
                                         <div class="form-group">
                                             <label for="product_category">Product Category</label>
                                             <select id="product_category" class="form-control select2" required>
-                                                <option> - Select Category - </option>
+                                                <option value=""> - Select Category - </option>
                                                 <option>Commercial</option>
                                                 <option>Space</option>
                                                 <option>Helicopter</option>
@@ -131,11 +144,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="product_description">Product Description</label>
-                                            <textarea name="product_description" class="form-control" id="product_description" placeholder="Enter Product Description"></textarea>
+                                            <textarea name="product_description" required class="form-control" id="product_description" placeholder="Enter Product Description"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="units">Units</label>
-                                            <input type="number" name="units" required class="form-control" id="units" placeholder="Enter Units">
+                                            <input type="number" name="units" min=0 required class="form-control" id="units" placeholder="Enter Units">
                                         </div>
                                     </form>
                                 </div>
@@ -168,7 +181,7 @@
                                         <div class="form-group">
                                             <label for="uproduct_category">Product Category</label>
                                             <select id="uproduct_category" class="form-control select2" required>
-                                                <option> - Select Category - </option>
+                                                <option value=""> - Select Category - </option>
                                                 <option>Commercial</option>
                                                 <option>Space</option>
                                                 <option>Helicopter</option>
@@ -182,11 +195,11 @@
                                         <div class="form-group">
                                             <label for="uproduct_description">Product Description</label>
                                             <textarea name="uproduct_description" class="form-control" id="uproduct_description"
-                                                placeholder="Enter Product Description"></textarea>
+                                                placeholder="Enter Product Description" required></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="uunits">Units</label>
-                                            <input type="number" name="uunits" required class="form-control" id="uunits" placeholder="Enter Units">
+                                            <input type="number" name="uunits" required class="form-control" min=0 id="uunits" placeholder="Enter Units">
                                         </div>
                                     </form>
                                 </div>

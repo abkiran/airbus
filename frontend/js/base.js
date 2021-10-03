@@ -1,6 +1,6 @@
 API_URL = "http://"+location.hostname + ":8000/"
 
-function do_login(params) {
+function do_login(params='') {
     username = $('#username').val()
     pass = $('#pass').val()
     if (username == '' || pass == '') {
@@ -21,20 +21,26 @@ function do_login(params) {
         }
     });
 }
+$(document).on('keypress', function (e) {
+    if (e.which == 13) {
+        do_login()
+    }
+});
 
 function do_logout(params) {
     // unset localStorage and cookies
     redirect_login()
 }
 
-function is_loggedin(params) {
-    
-}
-
 function get_inventory(params) {
+    url = API_URL + "inventory/"
+    product_category = $('#product_category_filter').val()
+    if (product_category != '') {
+        url = API_URL + "inventory/?product_category=" + product_category
+    }
     $.ajax({
         type: "GET",
-        url: API_URL + "inventory/",
+        url: url,
         data: {
             
         },
@@ -46,7 +52,7 @@ function get_inventory(params) {
 }
 
 function render_inventory_list(result_json) {
-    i = 0
+    i = 1
     tr = ""
     result_json.forEach(item => {
         tr += "<tr id='row-"+item['id']+"'>"
