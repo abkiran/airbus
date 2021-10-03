@@ -22,7 +22,11 @@ def inventory_list(request):
     List all code inventory, or create a new inventory.
     """
     if request.method == 'GET':
-        inventory = Inventory.objects.all()
+        product_category = request.GET.get('product_category')
+        if product_category:
+            inventory = Inventory.objects.filter(product_category=product_category)
+        else:
+            inventory = Inventory.objects.all()
         # paginator = PageNumberPagination()
         # inventory = paginator.paginate_queryset(inventory, request)
         serializer = InventorySerializer(inventory, many=True)
@@ -61,7 +65,14 @@ def inventory_detail(request, pk):
         serializer = InventorySerializer(inventory, data=data)
 
         if serializer.is_valid():
-            serializer.save()
+            try:
+                serializer.save()
+            except Exception as e:
+                print(e)
+                return JsonResponse(
+                    {
+                        "detail": "There is a record exists with the same product id, please try with a different one"
+                    }, status=409)
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
 
